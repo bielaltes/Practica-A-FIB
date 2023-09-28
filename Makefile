@@ -9,7 +9,7 @@ OBJ_DIR		= OBJ/
 CC = g++
 RM = rm -rf
 MP = mkdir -p
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror -fPIE
 # =============
 
 SRC_L	=	main.cpp kdtree.cpp node.cpp
@@ -38,11 +38,9 @@ $(NAME)::
 -include $(DEP)
 
 clean:
-	@$(MAKE) clean -C $(LIB_M) --no-print-directory
 	$(RM) $(OBJ_DIR)
 
 fclean: clean
-	@$(MAKE) fclean -C $(LIB_M) --no-print-directory
 	$(RM) $(NAME)
 
 re:
