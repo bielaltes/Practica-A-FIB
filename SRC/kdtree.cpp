@@ -27,6 +27,13 @@ kdtree &	kdtree::operator=( kdtree const & rhs )
 	return *this;
 }
 
+//ONE VERSION FOR EACH MEMBER OF THE GROUP :) 
+
+// neares neighbor 1 --> Isma
+node* kdtree::get_nearest_neighbor1(vector<float>& clau) {
+    //Ho fare dema putus micus
+}
+
 void kdtree::insert_node(vector<float>& clau) {
     if (_root == nullptr) {
         _root = new node(clau, 0);
