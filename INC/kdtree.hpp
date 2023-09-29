@@ -18,12 +18,13 @@ class kdtree
 		kdtree	&operator=(kdtree const &copy);
 
 		//Getters
+		node* get_nearest_neighbor(vector<float>& clau);
 
 		//Setters
 
 		//Member functions
 
-        void insert_node(vector<float>& clau);
+    void insert_node(vector<float>& clau);
 
 };
 
