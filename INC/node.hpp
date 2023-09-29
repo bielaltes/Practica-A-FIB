@@ -9,13 +9,13 @@ using namespace std;
 class node
 {
 	private:
-		vector<int> _coords;
+		vector<float> _coords;
         int         _disc;
         node        *_left;
         node        *_right;
 	public:
 		//Constructors and destructors
-		node( vector<int> &coords, int disc );
+		node(vector<float> &coords, int disc );
 		~node( void );
 		node(node const &copy);
 		node	&operator=(node const &copy);
@@ -27,6 +27,7 @@ class node
 		//Member functions
 
 		void destroyNodes(node* node);
+        void insert_node(vector<float>& clau);
 
 };
 

@@ -23,6 +23,8 @@ class kdtree
 
 		//Member functions
 
+        void insert_node(vector<float>& clau);
+
 };
 
 #endif

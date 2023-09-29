@@ -26,3 +26,10 @@ kdtree &	kdtree::operator=( kdtree const & rhs )
     this->_root = rhs._root;
 	return *this;
 }
+
+void kdtree::insert_node(vector<float>& clau) {
+    if (_root == nullptr) {
+        _root = new node(clau, 0);
+    }
+    else _root->insert_node(clau);
+}

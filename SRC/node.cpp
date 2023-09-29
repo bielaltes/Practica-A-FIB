@@ -1,6 +1,6 @@
 #include "../INC/kdtree.hpp"
 
-node::node( vector<int> &coords, int disc )
+node::node( vector<float> &coords, int disc )
 {
     this->_coords = coords;
     this->_disc = disc;
@@ -41,4 +41,15 @@ void node::destroyNodes(node* node) {
 
     delete node;
     node = NULL;
+}
+
+void node::insert_node(vector<float>& clau) {
+    int disc = this->_disc;
+    if (clau[disc] < this->_coords[disc]) {
+        if (this->_left == nullptr) _left = new node(clau, (disc+1)%this->_coords.size());
+        else this->_left->insert_node(clau);
+    }
+    else if (this->_right == nullptr) _right = new node(clau, (disc+1)%this->_coords.size());
+    else this->_right->insert_node(clau);
+
 }
