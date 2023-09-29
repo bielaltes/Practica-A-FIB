@@ -15,7 +15,8 @@ kdtree::kdtree( kdtree const & src)
 
 kdtree::~kdtree( void )
 {
-    //this should delete all nodes performing a path
+	
+	(*this->_root).destroyNodes(this->_root);
 	return ;
 }
 

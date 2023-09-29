@@ -17,8 +17,6 @@ node::node( node const & src)
 
 node::~node( void )
 {
-    //this should delete all nodes performing a path
-	return ;
 }
 
 node &	node::operator=( node const & rhs )
@@ -28,4 +26,19 @@ node &	node::operator=( node const & rhs )
     this->_left = rhs._left;
     this->_right = rhs._right;
 	return *this;
+}
+
+void node::destroyNodes(node* node) {
+    if (node->_left != NULL) {
+        destroyNodes(node->_left);
+    }
+    else delete node->_left;
+
+    if (node->_right != NULL) {
+        destroyNodes(node->_right);
+    }
+    else delete node->_right;
+
+    delete node;
+    node = NULL;
 }

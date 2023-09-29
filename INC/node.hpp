@@ -26,6 +26,8 @@ class node
 
 		//Member functions
 
+		void destroyNodes(node* node);
+
 };
 
 #endif
