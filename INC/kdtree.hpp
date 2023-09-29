@@ -9,7 +9,7 @@ class kdtree
 {
 	private:
 		int		_size;
-		node	*_root;
+		node* _root;
 	public:
 		//Constructors and destructors
 		kdtree( void );
