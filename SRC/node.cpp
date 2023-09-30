@@ -1,6 +1,6 @@
 #include "../INC/kdtree.hpp"
 
-node::node( vector<float> &coords, int disc )
+node::node( vector<double> &coords, int disc )
 {
     this->_coords = coords;
     this->_disc = disc;
@@ -28,6 +28,35 @@ node &	node::operator=( node const & rhs )
 	return *this;
 }
 
+int node::getDisc() const 
+{
+    return this->_disc;
+}
+
+double node::geticoord(int i) const
+{
+    return _coords[i];
+}
+
+node* node::getLeftNode() const
+{
+    return this->_left;
+}
+
+
+node* node::getRightNode() const
+{
+    return this->_left;
+}
+
+double node::getDistance(const vector<double>& query) const{
+    //compute euclidian distance
+    //provisional para que no de error por no usar query
+    if (query.size() > 0) return query[0];
+    else return 0.0;
+}
+
+
 void node::destroyNodes(node* node) {
     if (node->_left != NULL) {
         destroyNodes(node->_left);
@@ -43,7 +72,7 @@ void node::destroyNodes(node* node) {
     node = NULL;
 }
 
-void node::insert_node(vector<float>& clau) {
+void node::insert_node(vector<double>& clau) {
     int disc = this->_disc;
     if (clau[disc] < this->_coords[disc]) {
         if (this->_left == nullptr) _left = new node(clau, (disc+1)%this->_coords.size());

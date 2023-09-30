@@ -9,25 +9,30 @@ using namespace std;
 class node
 {
 	private:
-		vector<float> _coords;
+		vector<double> _coords;
         int         _disc;
         node        *_left;
         node        *_right;
 	public:
 		//Constructors and destructors
-		node(vector<float> &coords, int disc );
+		node(vector<double> &coords, int disc );
 		~node( void );
 		node(node const &copy);
 		node	&operator=(node const &copy);
 
 		//Getters
+		int getDisc() const;
+		double geticoord(int i) const;
+		node* getLeftNode() const;
+		node* getRightNode() const;
+		double getDistance(const vector<double>& query) const;
 
 		//Setters
 
 		//Member functions
 
 		void destroyNodes(node* node);
-        void insert_node(vector<float>& clau);
+    void insert_node(vector<double>& clau);
 
 };
 

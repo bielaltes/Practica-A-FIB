@@ -29,12 +29,43 @@ kdtree &	kdtree::operator=( kdtree const & rhs )
 
 //ONE VERSION FOR EACH MEMBER OF THE GROUP :) 
 
-// neares neighbor 1 --> Isma
-node* kdtree::get_nearest_neighbor1(vector<float>& clau) {
-    //Ho fare dema putus micus
+void kdtree::get_nearest_neighbor_recursive(const vector<double>& query, node* n, node* nn, double* min_dist)
+{
+    if (n == nullptr) return;
+    const double dist = n->getDistance(query);
+
+    if (dist < *min_dist) {
+        *min_dist = dist;
+        nn = n;  
+    }
+
+    //j = dicriminant
+    int j = n->getDisc();
+    
+    if (query[j] < n->geticoord(j)) {
+        get_nearest_neighbor_recursive(query, n->getLeftNode(), nn, min_dist);
+        double diff = fabs(query[j] - n->getDisc());
+        if (diff < *min_dist) get_nearest_neighbor_recursive(query, n->getRightNode(), nn, min_dist);
+    }
+    else {
+        get_nearest_neighbor_recursive(query, n->getRightNode(), nn, min_dist);
+        double diff = fabs(query[j] - n->getDisc());
+        if (diff < *min_dist) get_nearest_neighbor_recursive(query, n->getLeftNode(), nn, min_dist);
+    }
 }
 
-void kdtree::insert_node(vector<float>& clau) {
+node* kdtree::get_nearest_neighbor(const vector<double>& query)
+{
+    double min_dist = numeric_limits<double>::max();
+    node* nearest_node = nullptr;
+
+    get_nearest_neighbor_recursive(query, _root, nearest_node, &min_dist);
+
+    return nearest_node;
+}
+
+
+void kdtree::insert_node(vector<double>& clau) {
     if (_root == nullptr) {
         _root = new node(clau, 0);
     }
