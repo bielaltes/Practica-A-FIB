@@ -29,8 +29,11 @@ class kdtree
 		//Setters
 
 		//Member functions
-
+	vector<double> random_point(int dims);
     void insert_node(vector<double>& clau);
+    void generate_node_and_add(int dims);
+    node* random_point_and_nearest_neighbor(int dims);
+
 
 };
 
