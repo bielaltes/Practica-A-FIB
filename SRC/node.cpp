@@ -106,7 +106,31 @@ void node::insert_node(vector<double>& query, Kd_type disc_policy, vector<double
             this->_left->insert_node(query, disc_policy, bounding_box);
         }
     }
-    else if (this->_right == nullptr) _right = new node(query, (this->_disc+1)%this->_coords.size());
-    else this->_right->insert_node(query, disc_policy, bounding_box);
+    else if (this->_right == nullptr) {
+        _right = new node(query, (this->_disc+1)%this->_coords.size());
+            int disc = -1;
+            switch(disc_policy) {
+                case standard:
+                    disc = (this->_disc+1)%this->_coords.size();
+                    break;
+                case relaxed:
+                    srand(time(nullptr));
+                    disc = rand()%this->_coords.size();
+                    break;
+                case squarish:
+                    /* 
+                    double min = numeric_limits<int>::max();
+                    for (int i = 0; i < bounding_box.size(); ++i)
+                        if (bounding_box[i] < min) {
+                            min = bounding_box[i];
+                            disc = i;
+                        }
+                    */
+                    break;
+                default: break;
+                
+           }
+    }
+        else this->_right->insert_node(query, disc_policy, bounding_box);
 
 }
