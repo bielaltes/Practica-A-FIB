@@ -1,6 +1,6 @@
 #include "../INC/kdtree.hpp"
 
-node::node( vector<double> &coords, int disc )
+node::node( vector<double> &coords, int disc)
 {
     this->_coords = coords;
     this->_disc = disc;
@@ -72,13 +72,41 @@ void node::destroyNodes(node* node) {
     node = NULL;
 }
 
-void node::insert_node(vector<double>& clau) {
-    int disc = this->_disc;
-    if (clau[disc] < this->_coords[disc]) {
-        if (this->_left == nullptr) _left = new node(clau, (disc+1)%this->_coords.size());
-        else this->_left->insert_node(clau);
+void node::insert_node(vector<double>& query, Kd_type disc_policy, vector<double>& bounding_box)
+{
+    if (query[this->_disc] < this->_coords[this->_disc]) {
+        /* Reduzco la caja a partir del discriminante 
+         */
+        if (this->_left == nullptr) {
+            int disc = -1;
+            switch(disc_policy) {
+                case standard:
+                    disc = (this->_disc+1)%this->_coords.size();
+                    break;
+                case relaxed:
+                    srand(time(nullptr));
+                    disc = rand()%this->_coords.size();
+                    break;
+                case squarish:
+                    /* 
+                    double min = numeric_limits<int>::max();
+                    for (int i = 0; i < bounding_box.size(); ++i)
+                        if (bounding_box[i] < min) {
+                            min = bounding_box[i];
+                            disc = i;
+                        }
+                    */
+                    break;
+                default: break;
+                
+           }
+            _left = new node(query, disc);
+        }
+        else {
+            this->_left->insert_node(query, disc_policy, bounding_box);
+        }
     }
-    else if (this->_right == nullptr) _right = new node(clau, (disc+1)%this->_coords.size());
-    else this->_right->insert_node(clau);
+    else if (this->_right == nullptr) _right = new node(query, (this->_disc+1)%this->_coords.size());
+    else this->_right->insert_node(query, disc_policy, bounding_box);
 
 }

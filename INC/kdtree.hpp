@@ -14,6 +14,7 @@ class kdtree
 	private:
 		int		_size;
 		node* _root;
+        Kd_type _type;
 	public:
 		//Constructors and destructors
 		kdtree( void );
@@ -22,7 +23,7 @@ class kdtree
 		kdtree	&operator=(kdtree const &copy);
 
 		//Getters
-		void get_nearest_neighbor_recursive(const vector<double>& query, node* n, node* nn, double* min_dist);
+		void get_nearest_neighbor_recursive(const vector<double>& query, node* n, node*& nn, double& min_dist);
 		node* get_nearest_neighbor(const vector<double>& query);
 
 		//Setters
