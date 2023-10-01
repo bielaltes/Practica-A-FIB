@@ -17,10 +17,24 @@ int main( int argc, char **argv )
 
         //exemple de query per el output.csv
         vector<double> clau = {0.612, 0.489, 0.88};
-        node* n = k->get_nearest_neighbor(clau);
+        static clock_t start;
+        cout << "En temps logaritmic: \n";
 
+        start = clock();
+        node* n = k->get_nearest_neighbor(clau);
+        cout << fixed <<"El temps logaritmic ha tardat: " << static_cast<double>(clock() - start)/ CLOCKS_PER_SEC << " segons"<< endl;
         //per veure la clau més propera
         clau = n->getCoords();
+        for (int i = 0; i < (int)clau.size(); ++i) cout << clau[i] << ' ';
+        cout << endl;
+
+        cout << "En temps lineal: \n";
+        start = clock();
+        node* n_lineal = k->get_nearest_neighbor_lineal(clau);
+        cout << fixed << "El temps lineal ha tardat: " << static_cast<double>(clock() - start)/ CLOCKS_PER_SEC  << " segons" << endl;
+
+        //per veure la clau més propera
+        clau = n_lineal->getCoords();
         for (int i = 0; i < (int)clau.size(); ++i) cout << clau[i] << ' ';
         cout << endl;
     } 

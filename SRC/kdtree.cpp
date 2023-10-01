@@ -4,7 +4,7 @@ kdtree::kdtree() {
     _size = 0;
     _root = nullptr;
     _type = standard;
-}   
+}  
 
 kdtree::kdtree( const string &input )
 {
@@ -71,8 +71,8 @@ void kdtree::get_nearest_neighbor_recursive(const vector<double>& query, node* n
 {
     if (n == nullptr) return;
     const double dist = n->getDistance(query);
-    cout << "visiting node with 0-dim coord: " << n->geticoord(0) << endl;
-    cout << "Euclidian distance: " << dist << endl << endl;
+    //cout << "visiting node with 0-dim coord: " << n->geticoord(0) << endl;
+    //cout << "Euclidian distance: " << dist << endl << endl;
 
     if (dist < min_dist) {
         min_dist = dist;
@@ -103,6 +103,34 @@ node* kdtree::get_nearest_neighbor(const vector<double>& query)
 
     return nearest_node;
 }
+
+void kdtree::get_nearest_neighbor_lineal_recursive(const vector<double>& query, node* n, node*& nn, double& min_dist)
+{
+    if (n == nullptr) return;
+    const double dist = n->getDistance(query);
+
+    if (dist < min_dist) {
+        min_dist = dist;
+        nn = n;  
+    }
+
+    get_nearest_neighbor_lineal_recursive(query, n->getRightNode(), nn, min_dist);
+    get_nearest_neighbor_lineal_recursive(query, n->getLeftNode(), nn, min_dist);
+}
+
+
+node* kdtree::get_nearest_neighbor_lineal(const vector<double>& query)
+{
+    double min_dist = numeric_limits<double>::max();
+    node* nearest_node = nullptr;
+
+    get_nearest_neighbor_lineal_recursive(query, _root, nearest_node, min_dist);
+
+    return nearest_node;
+
+}
+
+
 
 
 void kdtree::insert_node(vector<double>& clau) {
