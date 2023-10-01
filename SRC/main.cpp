@@ -13,7 +13,16 @@ int main( int argc, char **argv )
     }
     else
     {
-        kdtree k((string(argv[1])));
+        kdtree* k = new kdtree((string(argv[1])));
+
+        //exemple de query per el output.csv
+        vector<double> clau = {0.612, 0.489, 0.88};
+        node* n = k->get_nearest_neighbor(clau);
+
+        //per veure la clau més propera
+        clau = n->getCoords();
+        for (int i = 0; i < (int)clau.size(); ++i) cout << clau[i] << ' ';
+        cout << endl;
     } 
     return 0;
 }

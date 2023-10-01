@@ -3,6 +3,7 @@
 # define KDTREE_HPP
 
 #include <iostream>
+#include <vector>
 #include <limits>
 #include <math.h>
 #include "node.hpp"
@@ -20,6 +21,7 @@ class kdtree
 		Kd_type _type;
 	public:
 		//Constructors and destructors
+		kdtree();
 		kdtree( const string &input );
 		~kdtree( void );
 		kdtree(kdtree const &copy);

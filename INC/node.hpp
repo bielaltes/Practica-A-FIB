@@ -31,12 +31,14 @@ class node
 		node* getRightNode() const;
 		double getDistance(const vector<double>& query) const;
 
+		vector<double> getCoords() const;
+
 		//Setters
 
 		//Member functions
 
 		void destroyNodes(node* node);
-        void insert_node(vector<double>& query, Kd_type disc_policy, vector<double>& bounding_box);
+    void insert_node(vector<double>& query, Kd_type disc_policy, vector<double>& bounding_box);
 
 };
 

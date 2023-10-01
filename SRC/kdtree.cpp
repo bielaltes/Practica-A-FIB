@@ -1,9 +1,16 @@
 #include "../INC/kdtree.hpp"
 
+kdtree::kdtree() {
+    _size = 0;
+    _root = nullptr;
+    _type = standard;
+}   
+
 kdtree::kdtree( const string &input )
 {
     this->_size = 0;
     this->_root = nullptr;
+    this->_type = standard;
 
     std::ifstream file(input);
     if (!file.is_open())
@@ -47,9 +54,9 @@ kdtree::kdtree( kdtree const & src)
 
 kdtree::~kdtree( void )
 {
-	
-	(*this->_root).destroyNodes(this->_root);
-	return ;
+    if (this->_root == nullptr) delete this->_root;
+    else (*this->_root).destroyNodes(this->_root);
+    return;
 }
 
 kdtree &	kdtree::operator=( kdtree const & rhs )
@@ -59,12 +66,13 @@ kdtree &	kdtree::operator=( kdtree const & rhs )
 	return *this;
 }
 
-//ONE VERSION FOR EACH MEMBER OF THE GROUP :) 
 
 void kdtree::get_nearest_neighbor_recursive(const vector<double>& query, node* n, node*& nn, double& min_dist)
 {
     if (n == nullptr) return;
     const double dist = n->getDistance(query);
+    cout << "visiting node with 0-dim coord: " << n->geticoord(0) << endl;
+    cout << "Euclidian distance: " << dist << endl << endl;
 
     if (dist < min_dist) {
         min_dist = dist;
@@ -73,7 +81,7 @@ void kdtree::get_nearest_neighbor_recursive(const vector<double>& query, node* n
 
     //j = dicriminant
     int j = n->getDisc();
-    
+
     if (query[j] < n->geticoord(j)) {
         get_nearest_neighbor_recursive(query, n->getLeftNode(), nn, min_dist);
         double diff = abs(query[j] - n->geticoord(j));

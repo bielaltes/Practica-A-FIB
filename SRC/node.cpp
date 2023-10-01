@@ -46,14 +46,20 @@ node* node::getLeftNode() const
 
 node* node::getRightNode() const
 {
-    return this->_left;
+    return this->_right;
 }
 
 double node::getDistance(const vector<double>& query) const{
-    //compute euclidian distance
-    //provisional para que no de error por no usar query
-    if (query.size() > 0) return query[0];
-    else return 0.0;
+    double sum = 0.0;
+    for (size_t i = 0; i < _coords.size(); ++i) {
+        double diff = _coords[i] - query[i];
+        sum += diff*diff;
+    }
+    return std::sqrt(sum);
+}
+
+vector<double> node::getCoords() const {
+    return _coords;
 }
 
 
