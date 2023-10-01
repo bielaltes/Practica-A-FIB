@@ -12,7 +12,7 @@ MP = mkdir -p
 CFLAGS = -g -Wall -Wextra -Werror -fPIE
 # =============
 
-SRC_L	=	main.cpp kdtree.cpp node.cpp
+SRC_L	=	main.cpp kdtree.cpp node.cpp CSVcreator.cpp
 
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_L))

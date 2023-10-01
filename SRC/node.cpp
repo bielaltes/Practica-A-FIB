@@ -109,6 +109,8 @@ void node::insert_node(vector<double>& query, Kd_type disc_policy, vector<double
     else if (this->_right == nullptr) {
         _right = new node(query, (this->_disc+1)%this->_coords.size());
             int disc = -1;
+            if (disc == 0)
+                return;
             switch(disc_policy) {
                 case standard:
                     disc = (this->_disc+1)%this->_coords.size();

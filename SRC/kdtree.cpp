@@ -1,9 +1,41 @@
 #include "../INC/kdtree.hpp"
 
-kdtree::kdtree( void )
+kdtree::kdtree( const string &input )
 {
     this->_size = 0;
     this->_root = nullptr;
+
+    std::ifstream file(input);
+    if (!file.is_open())
+        throw NoFile();
+
+    string line;
+    getline(file, line);
+    stringstream ss(line);
+    
+    int dim, size;
+    char aux;
+    ss >> dim >> aux >> size;
+
+    cout << dim << " " << size << endl;
+
+    for (int i = 0; i < size; ++i) 
+    {
+        std::string line;
+        if (std::getline(file, line)) 
+        {
+            std::istringstream lineStream(line);
+            string aux;
+            std::vector<double> values;
+            for (int j = 0; j < dim; ++j)
+            {
+                getline(lineStream, aux, ',');
+                values.push_back(atof(aux.c_str()));
+            }
+            insert_node(values);
+        }
+    }
+
 	return ;
 }
 
@@ -98,4 +130,9 @@ node* kdtree::random_point_and_nearest_neighbor(int dims) {
 
 	vector<double> point = random_point(dims);
 	return get_nearest_neighbor(point);	
+}
+
+const char *	kdtree::NoFile::what() const throw()
+{
+	return ("Problems reading the file");
 }
