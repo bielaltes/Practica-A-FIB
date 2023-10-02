@@ -94,21 +94,20 @@ void node::insert_node(vector<double>& query, Kd_type disc_policy, vector<double
                     disc = rand()%this->_coords.size();
                     break;
                 case squarish:
-                    /* 
-                    double min = numeric_limits<int>::max();
-                    for (int i = 0; i < bounding_box.size(); ++i)
-                        if (bounding_box[i] < min) {
-                            min = bounding_box[i];
+                    double max = numeric_limits<double>::min();
+                    for (long unsigned int i = 0; i < bounding_box.size(); ++i)
+                        if (bounding_box[i] > max) {
+                            max = bounding_box[i];
                             disc = i;
                         }
-                    */
                     break;
                 default: break;
                 
-           }
+            }
             _left = new node(query, disc);
         }
         else {
+            bounding_box[this->_disc] = this->_coords[this->_disc];
             this->_left->insert_node(query, disc_policy, bounding_box);
         }
     }
@@ -126,19 +125,21 @@ void node::insert_node(vector<double>& query, Kd_type disc_policy, vector<double
                     disc = rand()%this->_coords.size();
                     break;
                 case squarish:
-                    /* 
-                    double min = numeric_limits<int>::max();
-                    for (int i = 0; i < bounding_box.size(); ++i)
-                        if (bounding_box[i] < min) {
-                            min = bounding_box[i];
+                    double max = numeric_limits<int>::min();
+                    for (long unsigned int i = 0; i < bounding_box.size(); ++i)
+                        if (bounding_box[i] > max) {
+                            max = bounding_box[i];
                             disc = i;
                         }
-                    */
                     break;
                 default: break;
                 
-           }
+            }
+            _right = new node(query, disc);
     }
-        else this->_right->insert_node(query, disc_policy, bounding_box);
+    else {
+        bounding_box[this->_disc] = abs(this->_coords[this->_disc] - bounding_box[this->_disc]);
+        this->_right->insert_node(query, disc_policy, bounding_box);
+    }
 
 }
