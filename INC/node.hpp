@@ -17,6 +17,7 @@ class node
         int         _disc;
         node        *_left;
         node        *_right;
+        int choose_disc(Kd_type disc_policy, vector<double>& bounding_box);
 	public:
 		//Constructors and destructors
 		node(vector<double> &coords, int disc);

@@ -78,32 +78,36 @@ void node::destroyNodes(node* node) {
     node = NULL;
 }
 
+int node::choose_disc(Kd_type disc_policy, vector<double>& bounding_box) {
+    int disc = -1;
+    switch(disc_policy) {
+        case standard:
+        disc = (this->_disc+1)%this->_coords.size();
+        break;
+            case relaxed:
+                srand(time(nullptr));
+                disc = rand()%this->_coords.size();
+                break;
+            case squarish:
+                double max = numeric_limits<double>::min();
+                for (long unsigned int i = 0; i < bounding_box.size(); ++i)
+                    if (bounding_box[i] > max) {
+                        max = bounding_box[i];
+                        disc = i;
+                    }
+                break;
+            default: break;
+    }
+    return disc;
+}
+
 void node::insert_node(vector<double>& query, Kd_type disc_policy, vector<double>& bounding_box)
 {
     if (query[this->_disc] < this->_coords[this->_disc]) {
         /* Reduzco la caja a partir del discriminante 
          */
         if (this->_left == nullptr) {
-            int disc = -1;
-            switch(disc_policy) {
-                case standard:
-                    disc = (this->_disc+1)%this->_coords.size();
-                    break;
-                case relaxed:
-                    srand(time(nullptr));
-                    disc = rand()%this->_coords.size();
-                    break;
-                case squarish:
-                    double max = numeric_limits<double>::min();
-                    for (long unsigned int i = 0; i < bounding_box.size(); ++i)
-                        if (bounding_box[i] > max) {
-                            max = bounding_box[i];
-                            disc = i;
-                        }
-                    break;
-                default: break;
-                
-            }
+            int disc = choose_disc(disc_policy, bounding_box);
             _left = new node(query, disc);
         }
         else {
@@ -112,29 +116,7 @@ void node::insert_node(vector<double>& query, Kd_type disc_policy, vector<double
         }
     }
     else if (this->_right == nullptr) {
-        _right = new node(query, (this->_disc+1)%this->_coords.size());
-            int disc = -1;
-            if (disc == 0)
-                return;
-            switch(disc_policy) {
-                case standard:
-                    disc = (this->_disc+1)%this->_coords.size();
-                    break;
-                case relaxed:
-                    srand(time(nullptr));
-                    disc = rand()%this->_coords.size();
-                    break;
-                case squarish:
-                    double max = numeric_limits<double>::min();
-                    for (long unsigned int i = 0; i < bounding_box.size(); ++i)
-                        if (bounding_box[i] > max) {
-                            max = bounding_box[i];
-                            disc = i;
-                        }
-                    break;
-                default: break;
-                
-            }
+            int disc = choose_disc(disc_policy, bounding_box);
             _right = new node(query, disc);
     }
     else {
