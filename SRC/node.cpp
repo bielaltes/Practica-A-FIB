@@ -89,14 +89,14 @@ int node::choose_disc(Kd_type disc_policy, vector<double>& bounding_box) {
                 disc = rand()%this->_coords.size();
                 break;
             case squarish:
-                double max = numeric_limits<double>::min();
-                for (long unsigned int i = 0; i < bounding_box.size(); ++i)
-                    if (bounding_box[i] > max) {
+                float max = 0;
+                for (long unsigned int i = 0; i < bounding_box.size(); ++i) {
+                    if (bounding_box[i] > max or i == 0) {
                         max = bounding_box[i];
                         disc = i;
                     }
+                }
                 break;
-            default: break;
     }
     return disc;
 }
