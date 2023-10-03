@@ -82,21 +82,21 @@ int node::choose_disc(Kd_type disc_policy, vector<double>& bounding_box) {
     int disc = -1;
     switch(disc_policy) {
         case standard:
-        disc = (this->_disc+1)%this->_coords.size();
-        break;
-            case relaxed:
-                srand(time(nullptr));
-                disc = rand()%this->_coords.size();
-                break;
-            case squarish:
-                float max = 0;
-                for (long unsigned int i = 0; i < bounding_box.size(); ++i) {
-                    if (bounding_box[i] > max or i == 0) {
-                        max = bounding_box[i];
-                        disc = i;
-                    }
+            disc = (this->_disc+1)%this->_coords.size();
+            break;
+        case relaxed:
+            srand(time(nullptr));
+            disc = rand()%this->_coords.size();
+            break;
+        case squarish:
+            float max = 0;
+            for (long unsigned int i = 0; i < bounding_box.size(); ++i) {
+                if (bounding_box[i] > max or i == 0) {
+                    max = bounding_box[i];
+                    disc = i;
                 }
-                break;
+            }
+            break;
     }
     return disc;
 }

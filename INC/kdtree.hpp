@@ -17,6 +17,7 @@ class kdtree
 {
 	private:
 		int		_size;
+        int     _dim;
 		node* _root;
 		Kd_type _type;
 	public:
@@ -28,10 +29,11 @@ class kdtree
 		kdtree	&operator=(kdtree const &copy);
 
 		//Getters
-		void get_nearest_neighbor_recursive(const vector<double>& query, node* n, node*& nn, double& min_dist);
+        int getDim();
+		void get_nearest_neighbor_recursive(const vector<double>& query, node* n, node*& nn, double& min_dist, int &total);
 		node* get_nearest_neighbor(const vector<double>& query);
 		node *get_nearest_neighbor_lineal(const vector<double>& query);
-		void get_nearest_neighbor_lineal_recursive(const vector<double>& query, node* n, node*& nn, double& min_dist);
+		void get_nearest_neighbor_lineal_recursive(const vector<double>& query, node* n, node*& nn, double& min_dist, int &total);
 		//Setters
 
 		//Member functions
