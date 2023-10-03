@@ -22,13 +22,16 @@ vector<double> random_point(int dims) {
     return coords;
 }
 
-void execute(kdtree*& k, vector<double>& clau) {
+void execute(kdtree*& k, vector<double>& clau, double& timeMedian, int& nodeMedian) {
     static clock_t start;
     cout << "En temps logaritmic: \n";
 
     start = clock();
-    node* n = k->get_nearest_neighbor(clau);
+    node* n = k->get_nearest_neighbor(clau, nodeMedian);
     cout << fixed <<"El temps logaritmic ha tardat: " << static_cast<double>(clock() - start)/ CLOCKS_PER_SEC << " segons"<< endl;
+
+    timeMedian += static_cast<double>(clock() - start)/ CLOCKS_PER_SEC;
+
     //per veure la clau més propera
     clau = n->getCoords();
     for (int i = 0; i < (int)clau.size(); ++i) cout << clau[i] << ' ';
@@ -52,29 +55,46 @@ void run_file()
     cin >> aux;
     kdtree* k = new kdtree(aux + ".csv");
 
+
+    // Not important for single query executions
+    
+    double timeMedian = 0;
+    int nodeMedian = 0;
+
     cout << "Using random query" << endl;
     //exemple de query per el output.csv
     vector<double> clau(k->getDim());
     srand(time(NULL));
     clau = random_point(k->getDim());
-    execute(k,clau);
+    execute(k,clau, timeMedian, nodeMedian);
 }
 
 void random_trees() {
-    int tNum, dims, size, qSize, choice;
+    int tNum, dims, size, qSize;
 
-    cout << "Type the number of k-d trees to be created: \n";
+    double timeMedian;
+    int nodeMedian;
+
+    cout << "Number of dimensions:\n";
+    cin >> dims;
+
+    cout << "Number of nodes:\n";
+    cin >> size;
+
+    cout << "Number of k-d trees to be created:\n";
     cin >> tNum;
+
+    cout << "Number of random queries for each tree:\n";
+    cin >> qSize;
 
     for (int i = 0; i < tNum; ++i) {
 
+        timeMedian = 0.0;
+        nodeMedian = 0;
+
+        cout << "Testing for tree " << i << endl;
+
         srand(time(NULL));
-
-        cout << "Number of dimensions: \n";
-        cin >> dims;
-
-        cout << "Size of sample: \n";
-        cin >> size;
 
         // matriz de doubles, cada fila siendo una posición k-dimensional [0,1]^k
 
@@ -83,21 +103,21 @@ void random_trees() {
 
         kdtree* k = new kdtree(size, coords);
 
-        cout << "Size of the query: \n";
-        cin >> qSize;
-
-
-        cout << "Randomized (0) or inputed (1) values \n";
-
-        cin >> choice;
-
         vector<double> clau(dims);
 
         for (int j = 0; j < qSize; ++j) {
-            if (choice == 0) clau = random_point(dims);
-            else for (int z = 0; z < dims; ++z) cin >> clau[z];
-            execute(k, clau);
+            clau = random_point(dims);
+
+            cout << "\n ------------ \n";
+            for (int z = 0; z < dims; ++z) cout << clau[z] << " ";
+            cout << "\n ------------ \n";
+            execute(k, clau, timeMedian, nodeMedian);
+
+            cout << endl;
         }
+
+        cout << "The median of time taken for execution is " << timeMedian / qSize << " seconds " << endl;
+        cout << "The median of visited nodes is " << nodeMedian / qSize << endl << endl;
     }
 }
 

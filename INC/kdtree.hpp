@@ -32,7 +32,7 @@ class kdtree
 		//Getters
         int getDim();
 		void get_nearest_neighbor_recursive(const vector<double>& query, node* n, node*& nn, double& min_dist, int &total);
-		node* get_nearest_neighbor(const vector<double>& query);
+		node* get_nearest_neighbor(const vector<double>& query, int& retNodes);
 		node *get_nearest_neighbor_lineal(const vector<double>& query);
 		void get_nearest_neighbor_lineal_recursive(const vector<double>& query, node* n, node*& nn, double& min_dist, int &total);
 		//Setters
