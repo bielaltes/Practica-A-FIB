@@ -3,6 +3,8 @@ using namespace std;
 #include "../INC/kdtree.hpp"
 #include "../INC/CSVcreator.hpp"
 
+typedef vector<vector<double>> matrix;
+
 void usage()
 {
     cout << "Available commands:" << endl;
@@ -11,21 +13,16 @@ void usage()
     cout << "   random: execute random sample" << endl;
 }
 
-void run_file()
-{
-    string aux;
-    cout << "Insert name of the file" << endl;
-    cin >> aux;
-    kdtree* k = new kdtree(aux + ".csv");
+vector<double> random_point(int dims) {
 
-    cout << "Using random query" << endl;
-    //exemple de query per el output.csv
-    vector<double> clau(k->getDim());
-    srand(time(NULL));
-    for (int i = 0; i < k->getDim(); ++i)
-    {
-        clau[i] = (rand() % 1000000)/1000000.0f ;
+    vector<double> coords(dims);
+    for (int i = 0; i < dims; ++i) {
+        coords[i] = ((double) rand()) / RAND_MAX;
     }
+    return coords;
+}
+
+void execute(kdtree*& k, vector<double>& clau) {
     static clock_t start;
     cout << "En temps logaritmic: \n";
 
@@ -48,6 +45,68 @@ void run_file()
     cout << endl;
 }
 
+void run_file()
+{
+    string aux;
+    cout << "Insert name of the file" << endl;
+    cin >> aux;
+    kdtree* k = new kdtree(aux + ".csv");
+
+    cout << "Using random query" << endl;
+    //exemple de query per el output.csv
+    vector<double> clau(k->getDim());
+    srand(time(NULL));
+    clau = random_point(k->getDim());
+    execute(k,clau);
+}
+
+void random_trees() {
+    int tNum, dims, size, qSize, choice;
+
+    cout << "Type the number of k-d trees to be created: \n";
+    cin >> tNum;
+
+    for (int i = 0; i < tNum; ++i) {
+
+        srand(time(NULL));
+
+        cout << "Number of dimensions: \n";
+        cin >> dims;
+
+        cout << "Size of sample: \n";
+        cin >> size;
+
+        // matriz de doubles, cada fila siendo una posición k-dimensional [0,1]^k
+
+        matrix coords(size, vector<double>());
+        for (int j = 0; j < size; ++j) {
+            coords[j] = random_point(dims);
+            for (int z = 0; z < dims; ++z) cout << coords[j][z] << " ";
+            cout << endl;
+        }
+
+        kdtree* k = new kdtree(size, coords);
+
+        cout << "Size of the query: \n";
+        cin >> qSize;
+
+
+        cout << "Randomized (0) or inputed (1) values \n";
+
+        cin >> choice;
+
+        vector<double> clau(dims);
+
+        for (int j = 0; j < qSize; ++j) {
+            if (choice == 0) clau = random_point(dims);
+            else for (int z = 0; z < dims; ++z) cin >> clau[z];
+            for (int z = 0; z < dims; ++z) cout << clau[z] << " ";   
+            cout << endl;         
+            execute(k, clau);
+        }
+    }
+}
+
 int main( int argc, char **argv )
 {
     if (argc != 2)
@@ -64,7 +123,7 @@ int main( int argc, char **argv )
         }
         else if(string(argv[1]) == "random")
         {
-
+            random_trees();
         }
         else
             usage();

@@ -46,6 +46,14 @@ kdtree::kdtree( const string &input )
 	return ;
 }
 
+kdtree::kdtree(int size, vector<vector<double>> coords) {
+    this->_size = 0;
+    this->_root = nullptr;
+    this->_type = standard;
+
+    for (int i = 0; i < size; ++i) insert_node(coords[i]);
+}
+
 kdtree::kdtree( kdtree const & src) 
 {
     *this = src;
@@ -146,31 +154,6 @@ void kdtree::insert_node(vector<double>& clau) {
         vector<double> vd(clau.size(), 1.0);
         _root->insert_node(clau, _type, vd);
     }
-}
-
-// dims is passed as argument to know the number of dimensions our node is supposed to have
-
-vector<double> kdtree::random_point(int dims) {
-	srand(time(NULL));
-
-	vector<double> coords(dims);
-	for (int i = 0; i < dims; ++i) {
-		coords[i] = ((double) rand()) / RAND_MAX;
-		srand(time(NULL));
-	}
-	return coords;
-}
-
-void kdtree::generate_node_and_add(int dims) {
-
-	vector<double> coords = random_point(dims);
-	insert_node(coords);
-}
-
-node* kdtree::random_point_and_nearest_neighbor(int dims) {
-
-	vector<double> point = random_point(dims);
-	return get_nearest_neighbor(point);	
 }
 
 const char *	kdtree::NoFile::what() const throw()
