@@ -79,11 +79,7 @@ void random_trees() {
         // matriz de doubles, cada fila siendo una posición k-dimensional [0,1]^k
 
         matrix coords(size, vector<double>());
-        for (int j = 0; j < size; ++j) {
-            coords[j] = random_point(dims);
-            for (int z = 0; z < dims; ++z) cout << coords[j][z] << " ";
-            cout << endl;
-        }
+        for (int j = 0; j < size; ++j) coords[j] = random_point(dims);
 
         kdtree* k = new kdtree(size, coords);
 
@@ -100,8 +96,6 @@ void random_trees() {
         for (int j = 0; j < qSize; ++j) {
             if (choice == 0) clau = random_point(dims);
             else for (int z = 0; z < dims; ++z) cin >> clau[z];
-            for (int z = 0; z < dims; ++z) cout << clau[z] << " ";   
-            cout << endl;         
             execute(k, clau);
         }
     }
