@@ -23,8 +23,8 @@ class kdtree
 	public:
 		//Constructors and destructors
 		kdtree();
-		kdtree( const string &input );
-		kdtree (int sizes, const vector<vector<double>> coords);
+		kdtree( const string &input, Kd_type& type);
+		kdtree (int size, vector<vector<double>>& coords, Kd_type& type);
 		~kdtree( void );
 		kdtree(kdtree const &copy);
 		kdtree	&operator=(kdtree const &copy);

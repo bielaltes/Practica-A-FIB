@@ -50,14 +50,24 @@ void execute(kdtree*& k, vector<double>& clau, double& timeMedian, int& nodeMedi
 
 void run_file()
 {
-    string aux;
+    string aux, aux2;
+    Kd_type type;
     cout << "Insert name of the file" << endl;
     cin >> aux;
-    kdtree* k = new kdtree(aux + ".csv");
+
+    cout << "Select type of tree: standard, relaxed or squarish: ";
+    cin >> aux2;
+
+    if (aux2 == "standard") type = standard;
+    else if (aux2 == "relaxed") type = relaxed;
+    else if (aux2 == "squarish") type = squarish;
+    else type = standard;
+
+    kdtree* k = new kdtree(aux + ".csv", type);
 
 
     // Not important for single query executions
-    
+
     double timeMedian = 0;
     int nodeMedian = 0;
 
@@ -72,6 +82,10 @@ void run_file()
 void random_trees() {
     int tNum, dims, size, qSize;
 
+    string aux;
+
+    Kd_type type;
+
     double timeMedian;
     int nodeMedian;
 
@@ -83,6 +97,14 @@ void random_trees() {
 
     cout << "Number of k-d trees to be created:\n";
     cin >> tNum;
+
+    cout << "Select type of tree: standard, relaxed or squarish: ";
+    cin >> aux;
+
+    if (aux == "standard") type = standard;
+    else if (aux == "relaxed") type = relaxed;
+    else if (aux == "squarish") type = squarish;
+    else type = standard;
 
     cout << "Number of random queries for each tree:\n";
     cin >> qSize;
@@ -101,7 +123,7 @@ void random_trees() {
         matrix coords(size, vector<double>());
         for (int j = 0; j < size; ++j) coords[j] = random_point(dims);
 
-        kdtree* k = new kdtree(size, coords);
+        kdtree* k = new kdtree(size, coords, type);
 
         vector<double> clau(dims);
 

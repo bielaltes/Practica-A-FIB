@@ -7,11 +7,11 @@ kdtree::kdtree() {
     _type = standard;
 }  
 
-kdtree::kdtree( const string &input )
+kdtree::kdtree( const string &input, Kd_type& type)
 {
     this->_size = 0;
     this->_root = nullptr;
-    this->_type = standard;
+    this->_type = type;
 
     std::ifstream file(input);
     if (!file.is_open())
@@ -46,10 +46,10 @@ kdtree::kdtree( const string &input )
 	return ;
 }
 
-kdtree::kdtree(int size, vector<vector<double>> coords) {
+kdtree::kdtree(int size, vector<vector<double>>& coords, Kd_type& type) {
     this->_size = 0;
     this->_root = nullptr;
-    this->_type = standard;
+    this->_type = type;
 
     for (int i = 0; i < size; ++i) insert_node(coords[i]);
 }
