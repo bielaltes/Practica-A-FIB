@@ -12,7 +12,7 @@ MP = mkdir -p
 CFLAGS = -g -Wall -Wextra -Werror -fPIE
 # =============
 
-SRC_L	=	main.cc kdtree.cc node.cc CSVcreator.cc
+SRC_L	=	main.cc kdtree.cc node.cc CSVcreator.cc tester.cc
 
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_L))

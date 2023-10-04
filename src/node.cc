@@ -5,12 +5,10 @@ node::node( vector<double> &coords, int disc) {
     this->_disc = disc;
     this->_left = nullptr;
     this->_right = nullptr;
-    return;
 }
 
 node::node(node const & src)  {
     *this = src;
-	  return;
 }
 
 node::~node(void) {}

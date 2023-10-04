@@ -1,18 +1,7 @@
-/* -----------------------------------
-    El main recibe los parametros de los experimentos
-    y llama a un tester que se encargara de devolver
-    el resumen de nodos visitados en cada experimento, incluyendo
-    medias u otros aspectos que consideremos.
-
-    Se debera dotar al usuario de un manual de uso (funcion Usage)
-    ----------------------------------
-*/
-
-
-
 #include <iostream>
 #include "../inc/kdtree.hh"
 #include "../inc/CSVcreator.hh"
+#include "../inc/tester.hh"
 
 using namespace std;
 
@@ -20,11 +9,13 @@ typedef vector<vector<double>> matrix;
 
 void usage()
 {
-    cout << "Available commands:" << endl;
-    cout << "   create: creates a new sample" << endl;
-    cout << "   file: execute from an existing file" << endl;
-    cout << "   random: execute random sample" << endl;
+    cout << "Usage:" << endl;
+    cout << "   test" << endl;
+    //cout << "   file: execute from an existing file" << endl;
+    //cout << "   random: execute random sample" << endl;
 }
+
+/*
 
 vector<double> random_point(int dims) {
 
@@ -50,7 +41,6 @@ void execute(kdtree*& k, vector<double>& clau, double& timeMedian, int& nodeMedi
     for (int i = 0; i < (int)clau.size(); ++i) cout << clau[i] << ' ';
     cout << endl;
 
-    /*
     cout << "En temps lineal: \n";
     start = clock();
     node* n_lineal = k->get_nearest_neighbor_lineal(clau);
@@ -60,7 +50,6 @@ void execute(kdtree*& k, vector<double>& clau, double& timeMedian, int& nodeMedi
     clau = n_lineal->getCoords();
     for (int i = 0; i < (int)clau.size(); ++i) cout << clau[i] << ' ';
     cout << endl;
-    */
 }
 
 void run_file()
@@ -93,7 +82,6 @@ void run_file()
     clau = random_point(k->getDim());
     execute(k,clau, timeMedian, nodeMedian);
 }
-
 void random_trees() {
     int tNum, dims, size, qSize;
 
@@ -157,14 +145,24 @@ void random_trees() {
         cout << "The median of visited nodes is " << nodeMedian / qSize << endl << endl;
     }
 }
+*/
 
-int main( int argc, char **argv )
-{
-    if (argc != 2)
-        usage();
-    else
-    {
-        if (string(argv[1]) == "create")
+int main(int argc, char **argv)  {
+    if (argc != 2) usage();
+    else if (string(argv[1]) == "test") {
+            int k, n, N, Q; 
+            cout << "Insert the number of dimensions k: "; cin >> k;
+            cout << "Insert the number of nodes n: ";  cin >> n; 
+            cout << "Insert the number of random trees to generated: "; cin >> N;
+            cout << "Insert the number of queries in each tree: "; cin >> Q;
+            
+            tester* t = new tester(k, n, N, Q);
+            t->execute();
+            t->print_results();
+    }
+    /*
+
+        else if (string(argv[1]) == "create")
         {
             CSVcreator::createCSV();
         }
@@ -178,8 +176,6 @@ int main( int argc, char **argv )
         }
         else
             usage();
-
-        
-    } 
+    */
     return 0;
 }
