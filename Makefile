@@ -1,4 +1,4 @@
-NAME		= kdtree
+NAME		= kdtree_NN
 INC_DIR		= inc/
 MKFL		= Makefile
 SRC_DIR		= src/
@@ -33,7 +33,7 @@ $(NAME):: $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 $(NAME)::
-	@echo "Hello, kdtree already compiled"
+	@echo "Compiled without errors"
 
 -include $(DEP)
 
