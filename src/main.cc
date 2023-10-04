@@ -153,7 +153,7 @@ int main(int argc, char **argv)  {
             int k, n, N, Q; 
             cout << "Insert the number of dimensions k: "; cin >> k;
             cout << "Insert the number of nodes n: ";  cin >> n; 
-            cout << "Insert the number of random trees to generated: "; cin >> N;
+            cout << "Insert the number of random trees to generate: "; cin >> N;
             cout << "Insert the number of queries in each tree: "; cin >> Q;
             
             tester* t = new tester(k, n, N, Q);
