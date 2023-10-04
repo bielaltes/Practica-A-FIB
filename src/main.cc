@@ -1,7 +1,20 @@
+/* -----------------------------------
+    El main recibe los parametros de los experimentos
+    y llama a un tester que se encargara de devolver
+    el resumen de nodos visitados en cada experimento, incluyendo
+    medias u otros aspectos que consideremos.
+
+    Se debera dotar al usuario de un manual de uso (funcion Usage)
+    ----------------------------------
+*/
+
+
+
 #include <iostream>
-using namespace std;
 #include "../inc/kdtree.hh"
 #include "../inc/CSVcreator.hh"
+
+using namespace std;
 
 typedef vector<vector<double>> matrix;
 
