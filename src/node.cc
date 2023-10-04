@@ -94,24 +94,26 @@ int node::choose_disc(Kd_type disc_policy, vector<double>& bounding_box) {
 
 void node::insert_node(vector<double>& query, Kd_type disc_policy, vector<double>& bounding_box) {
     if (query[this->_disc] < this->_coords[this->_disc]) {
-        /* Reduzco la caja a partir del discriminante 
-         */
+        // Reduzco la caja a partir del discriminante 
+        
+        bounding_box[this->_disc] = this->_coords[this->_disc]; //bounding_box del cuadrante izquierdo
         if (this->_left == nullptr) {
             int disc = choose_disc(disc_policy, bounding_box);
             _left = new node(query, disc);
         }
         else {
-            bounding_box[this->_disc] = this->_coords[this->_disc];
             this->_left->insert_node(query, disc_policy, bounding_box);
         }
     }
-    else if (this->_right == nullptr) {
-            int disc = choose_disc(disc_policy, bounding_box);
-            _right = new node(query, disc);
-    }
     else {
         bounding_box[this->_disc] = abs(this->_coords[this->_disc] - bounding_box[this->_disc]);
-        this->_right->insert_node(query, disc_policy, bounding_box);
+        if (this->_right == nullptr) {
+            int disc = choose_disc(disc_policy, bounding_box);
+            _right = new node(query, disc);
+        }
+        else {
+            this->_right->insert_node(query, disc_policy, bounding_box);
+        }
     }
 
 }
