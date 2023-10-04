@@ -1,8 +1,6 @@
-
 #include "../inc/CSVcreator.hh"
 
-void CSVcreator::createCSV()
-{
+void CSVcreator::createCSV() {
     string input;
     cout << "Name of the file: \n";
     cin >> input;
@@ -27,11 +25,9 @@ void CSVcreator::createCSV()
                 file << (rand() % 1000000)/1000000.0f << ",";
         }
     }
-
 }
 
 
-const char *	CSVcreator::NoFile::what() const throw()
-{
+const char *	CSVcreator::NoFile::what() const throw() {
 	return ("Problems opening the file");
 }

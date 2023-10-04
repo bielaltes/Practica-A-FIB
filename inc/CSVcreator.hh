@@ -1,6 +1,5 @@
-
 #ifndef CSVCREATOR_HPP
-# define CSVCREATOR_HPP
+#define CSVCREATOR_HPP
 
 #include <iostream>
 #include <limits>
@@ -12,17 +11,14 @@
 using namespace std;
 
 //static class CSVcreator
-class CSVcreator
-{
+class CSVcreator {
 	public:
-        static void createCSV();
-
-        class	NoFile : public std::exception
-		{
+  	static void createCSV();
+		
+		class	NoFile : public std::exception {
 			public:
 				virtual const char *	what() const throw();
 		};
-
 };
 
 #endif

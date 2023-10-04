@@ -1,23 +1,23 @@
-
 #ifndef NODE_HPP
-# define NODE_HPP
+#define NODE_HPP
 
-using namespace std;
 #include <iostream>
 #include <vector>
 #include <time.h>
 #include <random>
 
+using namespace std;
+
 enum Kd_type {standard, relaxed, squarish};
 
-class node
-{
+class node {
 	private:
 		vector<double> _coords;
-        int         _disc;
-        node        *_left;
-        node        *_right;
-        int choose_disc(Kd_type disc_policy, vector<double>& bounding_box);
+    int _disc;
+    node* _left;
+    node* _right;
+    int choose_disc(Kd_type disc_policy, vector<double>& bounding_box);
+	
 	public:
 		//Constructors and destructors
 		node(vector<double> &coords, int disc);
@@ -31,16 +31,13 @@ class node
 		node* getLeftNode() const;
 		node* getRightNode() const;
 		double getDistance(const vector<double>& query) const;
-
 		vector<double> getCoords() const;
 
 		//Setters
 
 		//Member functions
-
 		void destroyNodes(node* node);
     void insert_node(vector<double>& query, Kd_type disc_policy, vector<double>& bounding_box);
-
 };
 
 #endif

@@ -9,16 +9,15 @@
 #include <fstream>
 #include <sstream>
 
-
 using namespace std;
 
-class kdtree
-{
+class kdtree {
 	private:
-		int		_size;
-    int     _dim;
+		int _size;
+    int _dim;
 		node* _root;
 		Kd_type _type;
+
 	public:
 		//Constructors and destructors
 		kdtree();
@@ -29,7 +28,7 @@ class kdtree
 		kdtree	&operator=(kdtree const &copy);
 
 		//Getters
-        int getDim();
+    int getDim();
 		void get_nearest_neighbor_recursive(const vector<double>& query, node* n, node*& nn, double& min_dist, int &total);
 		node* get_nearest_neighbor(const vector<double>& query, int& retNodes);
 		node *get_nearest_neighbor_lineal(const vector<double>& query);

@@ -1,55 +1,46 @@
 #include "../inc/kdtree.hh"
 
-node::node( vector<double> &coords, int disc)
-{
+node::node( vector<double> &coords, int disc) {
     this->_coords = coords;
     this->_disc = disc;
     this->_left = nullptr;
     this->_right = nullptr;
-	return ;
+    return;
 }
 
-node::node( node const & src) 
-{
+node::node(node const & src)  {
     *this = src;
-	return;
+	  return;
 }
 
-node::~node( void )
-{
-}
+node::~node(void) {}
 
-node &	node::operator=( node const & rhs )
-{
-	this->_coords = rhs._coords;
+node &	node::operator=(node const & rhs) {
+    this->_coords = rhs._coords;
     this->_disc = rhs._disc;
     this->_left = rhs._left;
     this->_right = rhs._right;
-	return *this;
+	  return *this;
 }
 
-int node::getDisc() const 
-{
+int node::getDisc() const {
     return this->_disc;
 }
 
-double node::geticoord(int i) const
-{
+double node::geticoord(int i) const {
     return _coords[i];
 }
 
-node* node::getLeftNode() const
-{
+node* node::getLeftNode() const {
     return this->_left;
 }
 
 
-node* node::getRightNode() const
-{
+node* node::getRightNode() const {
     return this->_right;
 }
 
-double node::getDistance(const vector<double>& query) const{
+double node::getDistance(const vector<double>& query) const {
     double sum = 0.0;
     for (size_t i = 0; i < _coords.size(); ++i) {
         double diff = _coords[i] - query[i];
@@ -101,8 +92,7 @@ int node::choose_disc(Kd_type disc_policy, vector<double>& bounding_box) {
     return disc;
 }
 
-void node::insert_node(vector<double>& query, Kd_type disc_policy, vector<double>& bounding_box)
-{
+void node::insert_node(vector<double>& query, Kd_type disc_policy, vector<double>& bounding_box) {
     if (query[this->_disc] < this->_coords[this->_disc]) {
         /* Reduzco la caja a partir del discriminante 
          */

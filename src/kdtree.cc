@@ -7,8 +7,7 @@ kdtree::kdtree() {
     _type = standard;
 }  
 
-kdtree::kdtree( const string &input, Kd_type& type)
-{
+kdtree::kdtree( const string &input, Kd_type& type) {
     this->_size = 0;
     this->_root = nullptr;
     this->_type = type;
@@ -42,46 +41,38 @@ kdtree::kdtree( const string &input, Kd_type& type)
             insert_node(values);
         }
     }
-
-	return ;
+    return;
 }
 
 kdtree::kdtree(int size, vector<vector<double>>& coords, Kd_type& type) {
     this->_size = 0;
     this->_root = nullptr;
     this->_type = type;
-
     for (int i = 0; i < size; ++i) insert_node(coords[i]);
 }
 
-kdtree::kdtree( kdtree const & src) 
-{
+kdtree::kdtree( kdtree const & src)  {
     *this = src;
-	return;
+    return;
 }
 
-kdtree::~kdtree( void )
-{
+kdtree::~kdtree(void) {
     if (this->_root == nullptr) delete this->_root;
     else (*this->_root).destroyNodes(this->_root);
     return;
 }
 
-kdtree &	kdtree::operator=( kdtree const & rhs )
-{
+kdtree &	kdtree::operator=(kdtree const & rhs) {
 	this->_size = rhs._size;
     this->_root = rhs._root;
 	return *this;
 }
 
-int kdtree::getDim()
-{
+int kdtree::getDim() {
     return (this->_dim);
 }
 
-
-void kdtree::get_nearest_neighbor_recursive(const vector<double>& query, node* n, node*& nn, double& min_dist, int &total)
-{
+void kdtree::get_nearest_neighbor_recursive(const vector<double>& query, node* n, node*& nn, double& min_dist, int &total) {
     if (n == nullptr) return;
     const double dist = n->getDistance(query);
     //cout << "visiting node with 0-dim coord: " << n->geticoord(0) << endl;
@@ -107,8 +98,7 @@ void kdtree::get_nearest_neighbor_recursive(const vector<double>& query, node* n
     }
 }
 
-node* kdtree::get_nearest_neighbor(const vector<double>& query, int& retNodes)
-{
+node* kdtree::get_nearest_neighbor(const vector<double>& query, int& retNodes) {
     double min_dist = numeric_limits<double>::max();
     node* nearest_node = nullptr;
     int total = 0;
@@ -120,8 +110,7 @@ node* kdtree::get_nearest_neighbor(const vector<double>& query, int& retNodes)
     return nearest_node;
 }
 
-void kdtree::get_nearest_neighbor_lineal_recursive(const vector<double>& query, node* n, node*& nn, double& min_dist, int &total)
-{
+void kdtree::get_nearest_neighbor_lineal_recursive(const vector<double>& query, node* n, node*& nn, double& min_dist, int &total) {
     if (n == nullptr) return;
     const double dist = n->getDistance(query);
 
@@ -135,8 +124,7 @@ void kdtree::get_nearest_neighbor_lineal_recursive(const vector<double>& query, 
 }
 
 
-node* kdtree::get_nearest_neighbor_lineal(const vector<double>& query)
-{
+node* kdtree::get_nearest_neighbor_lineal(const vector<double>& query) {
     double min_dist = numeric_limits<double>::max();
     node* nearest_node = nullptr;
     int total = 0;
@@ -145,9 +133,6 @@ node* kdtree::get_nearest_neighbor_lineal(const vector<double>& query)
     return nearest_node;
 
 }
-
-
-
 
 void kdtree::insert_node(vector<double>& clau) {
     if (_root == nullptr) {
@@ -159,7 +144,6 @@ void kdtree::insert_node(vector<double>& clau) {
     }
 }
 
-const char *	kdtree::NoFile::what() const throw()
-{
+const char *	kdtree::NoFile::what() const throw() {
 	return ("Problems reading the file");
 }
