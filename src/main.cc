@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
-#include "../INC/kdtree.hpp"
-#include "../INC/CSVcreator.hpp"
+#include "../inc/kdtree.hh"
+#include "../inc/CSVcreator.hh"
 
 typedef vector<vector<double>> matrix;
 

@@ -1,4 +1,4 @@
-#include "../INC/kdtree.hpp"
+#include "../inc/kdtree.hh"
 
 node::node( vector<double> &coords, int disc)
 {

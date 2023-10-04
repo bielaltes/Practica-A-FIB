@@ -1,8 +1,8 @@
 NAME		= kdtree
-INC_DIR		= INC/
+INC_DIR		= inc/
 MKFL		= Makefile
-SRC_DIR		= SRC/
-OBJ_DIR		= OBJ/
+SRC_DIR		= src/
+OBJ_DIR		= obj/
 
 
 # -------------
@@ -12,17 +12,17 @@ MP = mkdir -p
 CFLAGS = -g -Wall -Wextra -Werror -fPIE
 # =============
 
-SRC_L	=	main.cpp kdtree.cpp node.cpp CSVcreator.cpp
+SRC_L	=	main.cc kdtree.cc node.cc CSVcreator.cc
 
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_L))
 
 # -------------
-OBJ = $(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
+OBJ = $(addprefix $(OBJ_DIR), $(SRC:.cc=.o))
 DEP = $(addsuffix .d, $(basename $(OBJ)))
 # =============
 
-$(OBJ_DIR)%.o: %.cpp $(MKFL)
+$(OBJ_DIR)%.o: %.cc $(MKFL)
 	@$(MP) $(dir $@)
 	@$(CC) $(CFLAGS) -MMD -I $(INC_DIR) -c $< -o $@
 

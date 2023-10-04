@@ -1,5 +1,5 @@
 
-#include "../INC/CSVcreator.hpp"
+#include "../inc/CSVcreator.hh"
 
 void CSVcreator::createCSV()
 {

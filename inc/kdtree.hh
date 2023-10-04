@@ -1,12 +1,11 @@
-
-#ifndef KDTREE_HPP
-# define KDTREE_HPP
+#ifndef KDTREE_HH
+#define KDTREE_HH
 
 #include <iostream>
 #include <vector>
 #include <limits>
 #include <math.h>
-#include "node.hpp"
+#include "node.hh"
 #include <fstream>
 #include <sstream>
 
@@ -17,7 +16,7 @@ class kdtree
 {
 	private:
 		int		_size;
-        int     _dim;
+    int     _dim;
 		node* _root;
 		Kd_type _type;
 	public:

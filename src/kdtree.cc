@@ -1,4 +1,4 @@
-#include "../INC/kdtree.hpp"
+#include "../inc/kdtree.hh"
 
 kdtree::kdtree() {
     _size = 0;
