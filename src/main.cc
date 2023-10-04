@@ -50,6 +50,7 @@ void execute(kdtree*& k, vector<double>& clau, double& timeMedian, int& nodeMedi
     for (int i = 0; i < (int)clau.size(); ++i) cout << clau[i] << ' ';
     cout << endl;
 
+    /*
     cout << "En temps lineal: \n";
     start = clock();
     node* n_lineal = k->get_nearest_neighbor_lineal(clau);
@@ -59,6 +60,7 @@ void execute(kdtree*& k, vector<double>& clau, double& timeMedian, int& nodeMedi
     clau = n_lineal->getCoords();
     for (int i = 0; i < (int)clau.size(); ++i) cout << clau[i] << ' ';
     cout << endl;
+    */
 }
 
 void run_file()
