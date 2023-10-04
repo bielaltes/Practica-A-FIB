@@ -22,7 +22,6 @@ vd tester::random_point(int dim) {
 }
 
 void tester::execute() {
-
     for (int ty = 0; ty < 3; ++ty) { 
         for (int i = 0; i < _N; ++i) {
             vvd coords(_n, vector<double>()); 
