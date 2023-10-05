@@ -7,13 +7,16 @@
 #include <ctime>
 #include <fstream>
 #include <sstream>
+#include "kdtree.hh"
+#include "node.hh"
 
 using namespace std;
 
 //static class CSVcreator
 class CSVcreator {
 	public:
-  	static void createCSV();
+  	    static void createCSV();
+        static void runCSV();
 		
 		class	NoFile : public std::exception {
 			public:

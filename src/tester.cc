@@ -43,6 +43,7 @@ void tester::execute() {
                 else if (ty == 1) visited_relaxed += visited_nodes;
                 else visited_squarish += visited_nodes;
             }
+            delete kdt;
         }
     }
     visited_standard /= (_N*_Q);

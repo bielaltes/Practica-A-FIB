@@ -98,12 +98,12 @@ void kdtree::get_nearest_neighbor_recursive(const vector<double>& query, node* n
     }
 }
 
-void kdtree::get_nearest_neighbor(const vector<double>& query, int& total) {
+node* kdtree::get_nearest_neighbor(const vector<double>& query, int& total) {
     double min_dist = numeric_limits<double>::max();
     node* nearest_node = nullptr;
     total = 0;
     get_nearest_neighbor_recursive(query, _root, nearest_node, min_dist, total);
-    //cout << "Nodes visitats: " << total << endl;
+    return nearest_node;
 }
 
 void kdtree::get_nearest_neighbor_lineal_recursive(const vector<double>& query, node* n, node*& nn, double& min_dist, int &total) {
