@@ -1,6 +1,6 @@
 #include "../inc/kdtree.hh"
 
-node::node( vector<double> &coords, int disc) {
+node::node( const vector<double> &coords, int disc) {
     this->_coords = coords;
     this->_disc = disc;
     this->_left = nullptr;
@@ -74,7 +74,6 @@ int node::choose_disc(Kd_type disc_policy, vector<double>& bounding_box) {
             disc = (this->_disc+1)%this->_coords.size();
             break;
         case relaxed:
-            srand(time(nullptr));
             disc = rand()%this->_coords.size();
             break;
         case squarish:
@@ -90,7 +89,7 @@ int node::choose_disc(Kd_type disc_policy, vector<double>& bounding_box) {
     return disc;
 }
 
-void node::insert_node(vector<double>& query, Kd_type disc_policy, vector<double>& bounding_box) {
+void node::insert_node(const vector<double>& query, Kd_type disc_policy, vector<double>& bounding_box) {
     if (query[this->_disc] < this->_coords[this->_disc]) {
         // Reduzco la caja a partir del discriminante 
         

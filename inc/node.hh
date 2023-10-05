@@ -20,7 +20,7 @@ class node {
 
 	public:
 		//Constructors and destructors
-		node(vector<double> &coords, int disc);
+		node(const vector<double> &coords, int disc);
 		~node( void );
 		node(node const &copy);
 		node	&operator=(node const &copy);
@@ -37,7 +37,7 @@ class node {
 
 		//Member functions
 		void destroyNodes(node* node);
-    void insert_node(vector<double>& query, Kd_type disc_policy, vector<double>& bounding_box);
+        void insert_node(const vector<double>& query, Kd_type disc_policy, vector<double>& bounding_box);
 };
 
 #endif

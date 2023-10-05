@@ -24,15 +24,13 @@ vd tester::random_point(int dim) {
 void tester::execute() {
     for (int ty = 0; ty < 3; ++ty) { 
         for (int i = 0; i < _N; ++i) {
-            vvd coords(_n, vector<double>()); 
-            for (int j = 0; j < _n; ++j) coords[j] = random_point(_k);
-            
             Kd_type type;
             if (ty == 0) type = standard;
             else if (ty == 1) type = relaxed;
             else type = squarish;
-            kdtree* kdt = new kdtree(_n, coords, type);
-       
+            kdtree* kdt = new kdtree(_n, type);
+            for (int i = 0; i < _n; ++i) kdt->insert_random_node(_k);
+
             vector<double> query;
             for (int j = 0; j < _Q; ++j) {
                 query = random_point(_k);  

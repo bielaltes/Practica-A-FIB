@@ -22,7 +22,7 @@ class kdtree {
 		//Constructors and destructors
 		kdtree();
 		kdtree( const string &input, Kd_type& type);
-		kdtree (int size, vector<vector<double>>& coords, Kd_type& type);
+		kdtree (int size, Kd_type& type);
 		~kdtree( void );
 		kdtree(kdtree const &copy);
 		kdtree	&operator=(kdtree const &copy);
@@ -36,7 +36,8 @@ class kdtree {
 		//Setters
 
 		//Member functions
-		void insert_node(vector<double>& clau);
+		void insert_node(const vector<double>& clau);
+		void insert_random_node(int dimensions);
 
 		class	NoFile : public std::exception
 		{

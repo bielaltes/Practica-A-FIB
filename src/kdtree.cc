@@ -44,11 +44,11 @@ kdtree::kdtree( const string &input, Kd_type& type) {
     return;
 }
 
-kdtree::kdtree(int size, vector<vector<double>>& coords, Kd_type& type) {
+kdtree::kdtree(int size, Kd_type& type) {
+    (void) size;
     this->_size = 0;
     this->_root = nullptr;
     this->_type = type;
-    for (int i = 0; i < size; ++i) insert_node(coords[i]);
 }
 
 kdtree::kdtree( kdtree const & src)  {
@@ -130,7 +130,22 @@ node* kdtree::get_nearest_neighbor_lineal(const vector<double>& query) {
 
 }
 
-void kdtree::insert_node(vector<double>& clau) {
+void kdtree::insert_node(const vector<double>& clau) {
+    if (_root == nullptr) {
+        _root = new node(clau, 0);
+    }
+    else{
+        vector<double> vd(clau.size(), 1.0);
+        _root->insert_node(clau, _type, vd);
+    }
+}
+
+void kdtree::insert_random_node(int dimensions) {
+    vector<double> clau(dimensions);
+    for (int i = 0; i < dimensions; ++i)
+    {
+        clau[i] = ((double) rand()) / RAND_MAX;
+    }
     if (_root == nullptr) {
         _root = new node(clau, 0);
     }

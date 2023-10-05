@@ -21,7 +21,7 @@ class tester {
 		int visited_relaxed;
 		int visited_squarish;
 
-		vd random_point(int dim);
+		vector<double> random_point(int dim);
 
 	public:
 		//Constructors and destructors
