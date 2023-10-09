@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "kdtree.hh"
+#include <random>
 
 typedef vector<double> vd;
 typedef vector<vd> vvd;

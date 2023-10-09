@@ -44,11 +44,12 @@ kdtree::kdtree( const string &input, Kd_type& type) {
     return;
 }
 
-kdtree::kdtree(int size, Kd_type& type) {
+kdtree::kdtree(int size, int dim, Kd_type& type) {
     (void) size;
     this->_size = 0;
     this->_root = nullptr;
     this->_type = type;
+    this->_dim = dim;
 }
 
 kdtree::kdtree( kdtree const & src)  {
@@ -144,7 +145,15 @@ void kdtree::insert_random_node(int dimensions) {
     vector<double> clau(dimensions);
     for (int i = 0; i < dimensions; ++i)
     {
-        clau[i] = ((double) rand()) / RAND_MAX;
+        random_device RandomDevice;
+        unsigned seed = RandomDevice();
+
+        default_random_engine generator(seed);
+        uniform_real_distribution<double> Uniforme(0.0, 1.0);
+       
+        clau[i] = Uniforme(generator);
+        //clau[i] = ((double) rand()) / RAND_MAX;
+        
     }
     if (_root == nullptr) {
         _root = new node(clau, 0);

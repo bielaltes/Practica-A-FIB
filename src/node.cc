@@ -69,13 +69,21 @@ void node::destroyNodes(node* node) {
 
 int node::choose_disc(Kd_type disc_policy, vector<double>& bounding_box) {
     int disc = -1;
-    switch(disc_policy) {
+    switch (disc_policy) {
         case standard:
             disc = (this->_disc+1)%this->_coords.size();
             break;
         case relaxed:
+            //random_device RandomDevice;
+            //unsigned seed = RandomDevice();
+
+            //default_random_engine generator(seed);
+            //uniform_int_distribution<int> Uniforme(0, this->_coords.size());
+    
+            //disc = Uniforme(generator);
             disc = rand()%this->_coords.size();
             break;
+
         case squarish:
             float max = 0;
             for (long unsigned int i = 0; i < bounding_box.size(); ++i) {

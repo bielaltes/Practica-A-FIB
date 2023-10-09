@@ -8,6 +8,7 @@
 #include "node.hh"
 #include <fstream>
 #include <sstream>
+#include <random>
 
 using namespace std;
 
@@ -22,7 +23,7 @@ class kdtree {
 		//Constructors and destructors
 		kdtree();
 		kdtree( const string &input, Kd_type& type);
-		kdtree (int size, Kd_type& type);
+		kdtree (int size, int dim, Kd_type& type);
 		~kdtree( void );
 		kdtree(kdtree const &copy);
 		kdtree	&operator=(kdtree const &copy);
