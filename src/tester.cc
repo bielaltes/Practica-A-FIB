@@ -6,9 +6,9 @@ tester::tester(int k, int n, int N, int Q) {
     this->_N = N;
     this->_Q = Q;
 
-    this->visited_standard = 0;
-    this->visited_relaxed = 0;
-    this->visited_squarish = 0;
+    this->average_standard = 0;
+    this->average_relaxed = 0;
+    this->average_squarish = 0;
 }
 
 tester::~tester(void) {}
@@ -44,24 +44,24 @@ void tester::execute() {
                 int visited_nodes = 0;
                 kdt->get_nearest_neighbor(query, visited_nodes);
 
-                if (ty == 0) visited_standard += visited_nodes;
-                else if (ty == 1) visited_relaxed += visited_nodes;
-                else visited_squarish += visited_nodes;
+                if (ty == 0) average_standard += visited_nodes;
+                else if (ty == 1) average_relaxed += visited_nodes;
+                else average_squarish += visited_nodes;
             }
             delete kdt;
         }
     }
-    visited_standard /= (_N*_Q);
-    visited_relaxed /= (_N*_Q);
-    visited_squarish /= (_N*_Q);
+    average_standard /= (_N*_Q);
+    average_relaxed /= (_N*_Q);
+    average_squarish /= (_N*_Q);
 }
 
 void tester::print_results() {
     cout << endl;
     cout << "---- RESULTS ----" << endl << endl;
-    cout << "Standard: " << visited_standard << " (average)" << endl;
-    cout << "Relaxed: " << visited_relaxed << " (average)" << endl;
-    cout << "Squarish: " << visited_squarish << " (average)" << endl;
+    cout << "Standard: " << average_standard << " (average)" << endl;
+    cout << "Relaxed: " << average_relaxed << " (average)" << endl;
+    cout << "Squarish: " << average_squarish << " (average)" << endl;
 }
 
 
