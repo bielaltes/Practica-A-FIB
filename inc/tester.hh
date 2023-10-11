@@ -26,7 +26,6 @@ class tester {
 		double variance_relaxed;
 		double variance_squarish;
 
-        pthread_t threads[3];
 		vector<double> random_point(int dim);
 
 	public:
