@@ -144,7 +144,14 @@ void kdtree::insert_random_node(int dimensions) {
     vector<double> clau(dimensions);
     for (int i = 0; i < dimensions; ++i)
     {
-        clau[i] = ((double) rand()) / RAND_MAX;
+        random_device RandomDevice;
+        unsigned seed = RandomDevice();
+
+        default_random_engine generator(seed);
+        uniform_real_distribution<double> Uniforme(0.0, 1.0);
+       
+        clau[i] = Uniforme(generator);
+        //clau[i] = ((double) rand()) / RAND_MAX;
     }
     if (_root == nullptr) {
         _root = new node(clau, 0);

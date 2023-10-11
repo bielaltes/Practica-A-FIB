@@ -15,8 +15,16 @@ tester::~tester(void) {}
 
 vd tester::random_point(int dim) {
     vd coords(dim);
+
+    random_device RandomDevice;
+    unsigned seed = RandomDevice();
+
+    default_random_engine generator(seed);
+    uniform_real_distribution<double> Uniforme(0.0, 1.0);
+    
     for (int i = 0; i < dim; ++i) 
-        coords[i] = ((double) rand()) / RAND_MAX;
+        coords[i] = Uniforme(generator);
+        //coords[i] = ((double) rand()) / RAND_MAX;
     
     return coords;
 }
