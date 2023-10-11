@@ -38,11 +38,11 @@ void tester::execute() {
             kdtree* kdt = new kdtree(_n, _k, type);
             for (int i = 0; i < _n; ++i) kdt->insert_random_node(_k);
 
-            vector<double> query;
-            for (int j = 0; j < _Q; ++j) {
-                query = random_point(_k);  
-                int visited_nodes = 0;
-                kdt->get_nearest_neighbor(query, visited_nodes);
+        vector<double> query;
+        for (int j = 0; j < t._Q; ++j) {
+            query = t.random_point(t._k);  
+            int visited_nodes = 0;
+            kdt->get_nearest_neighbor(query, visited_nodes);
 
                 if (ty == 0) average_standard += visited_nodes;
                 else if (ty == 1) average_relaxed += visited_nodes;
