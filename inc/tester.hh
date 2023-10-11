@@ -4,11 +4,12 @@
 #include <vector>
 #include "kdtree.hh"
 #include <pthread.h>
+
 typedef vector<double> vd;
 typedef vector<vd> vvd;
 
 class tester {
-	private:
+	public:
 		int _k; //k-dimensions
 		int _n; //n number of nodes
 		int _N; //Number of random trees to create
@@ -29,7 +30,7 @@ class tester {
 		tester(int k, int n, int N, int Q);
 		~tester(void);
 
-        void exec_pthread(tester *t);
+        static void *exec_pthread(void *t);
 		void execute();
 		void print_results();
 };
