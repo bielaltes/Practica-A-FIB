@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "kdtree.hh"
-
+#include <pthread.h>
 typedef vector<double> vd;
 typedef vector<vd> vvd;
 
@@ -21,6 +21,7 @@ class tester {
 		int visited_relaxed;
 		int visited_squarish;
 
+        pthread_t threads[3];
 		vector<double> random_point(int dim);
 
 	public:
@@ -28,6 +29,7 @@ class tester {
 		tester(int k, int n, int N, int Q);
 		~tester(void);
 
+        void exec_pthread(tester *t);
 		void execute();
 		void print_results();
 };
