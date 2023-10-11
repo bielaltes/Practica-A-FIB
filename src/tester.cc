@@ -39,8 +39,8 @@ void tester::execute() {
             for (int i = 0; i < _n; ++i) kdt->insert_random_node(_k);
 
         vector<double> query;
-        for (int j = 0; j < t._Q; ++j) {
-            query = t.random_point(t._k);  
+        for (int j = 0; j < _Q; ++j) {
+            query = random_point(_k);  
             int visited_nodes = 0;
             kdt->get_nearest_neighbor(query, visited_nodes);
 
