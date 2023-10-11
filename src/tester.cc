@@ -21,7 +21,7 @@ vd tester::random_point(int dim) {
 
     default_random_engine generator(seed);
     uniform_real_distribution<double> Uniforme(0.0, 1.0);
-    
+
     for (int i = 0; i < dim; ++i) 
         coords[i] = Uniforme(generator);
         //coords[i] = ((double) rand()) / RAND_MAX;
@@ -47,9 +47,21 @@ void *tester::exec_pthread(void *aux)
             int visited_nodes = 0;
             kdt->get_nearest_neighbor(query, visited_nodes);
 
-            if (ty == 0) t->visited_standard += visited_nodes;
-            else if (ty == 1) t->visited_relaxed += visited_nodes;
-            else t->visited_squarish += visited_nodes;
+            if (ty == 0) 
+            {
+                t->visited_standard += visited_nodes;
+                t->variance_standard += visited_nodes * visited_nodes;
+            }
+            else if (ty == 1)
+            {
+                t->visited_relaxed += visited_nodes;
+                t->variance_relaxed += visited_nodes * visited_nodes;
+            } 
+            else 
+                {
+                t->visited_squarish += visited_nodes;
+                t->variance_squarish += visited_nodes * visited_nodes;
+            }
         }
         delete kdt;
     }
@@ -69,14 +81,18 @@ void tester::execute() {
     visited_standard /= (_N*_Q);
     visited_relaxed /= (_N*_Q);
     visited_squarish /= (_N*_Q);
+
+    variance_standard = variance_standard/(_N*_Q) - visited_standard;
+    variance_relaxed = variance_relaxed/(_N*_Q) - visited_relaxed;
+    variance_squarish = variance_squarish/(_N*_Q) - visited_squarish;
 }
 
 void tester::print_results() {
     cout << endl;
     cout << "---- RESULTS ----" << endl << endl;
-    cout << "Standard: " << visited_standard << " (average)" << endl;
-    cout << "Relaxed: " << visited_relaxed << " (average)" << endl;
-    cout << "Squarish: " << visited_squarish << " (average)" << endl;
+    cout << "Standard: Visited nodes: " << visited_standard << " (average) Variança: " << variance_standard << endl;
+    cout << "Relaxed: Visited nodes: " << visited_relaxed << " (average) Variança: " << variance_relaxed <<endl;
+    cout << "Squarish: Visited nodes: " << visited_squarish << " (average) Variança: " << variance_squarish <<endl;
 }
 
 

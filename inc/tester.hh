@@ -18,9 +18,13 @@ class tester {
 		//Deberiamos tener alguna estructura de datos para guardar informacion 
 		//sobre cada query de cada árbol (para posteriormente printearlo!)
 
-		int visited_standard;
-		int visited_relaxed;
-		int visited_squarish;
+		int visited_standard = 0;
+		int visited_relaxed = 0;
+		int visited_squarish = 0;
+
+        double variance_standard = 0;
+        double variance_relaxed = 0;
+        double variance_squarish = 0;
 
         pthread_t threads[3];
 		vector<double> random_point(int dim);
