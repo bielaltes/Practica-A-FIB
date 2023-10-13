@@ -9,7 +9,7 @@ OBJ_DIR		= obj/
 CC = g++
 RM = rm -rf
 MP = mkdir -p
-CFLAGS = -g -Wall -Wextra -Werror -fPIE
+CFLAGS = -g -Wall -Wextra -Werror -fPIE -pthread
 # =============
 
 SRC_L	=	main.cc kdtree.cc node.cc CSVcreator.cc tester.cc

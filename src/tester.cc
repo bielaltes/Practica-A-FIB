@@ -72,11 +72,11 @@ void *tester::exec_pthread(void *aux)
 }
 
 void tester::execute() {
-    pair p1 = make_pair(this, 0);
+    pair<tester*, int> p1 = make_pair(this, 0);
     pthread_create(&threads[0], NULL, exec_pthread, &p1);
-    pair p2 = make_pair(this, 1);
+    pair<tester*, int> p2 = make_pair(this, 1);
     pthread_create(&threads[1], NULL, exec_pthread, &p2);
-    pair p3 = make_pair(this, 2);
+    pair<tester*, int> p3 = make_pair(this, 2);
     pthread_create(&threads[2], NULL, exec_pthread, &p3);
     
     for (int ty = 0; ty < 3; ++ty) 
