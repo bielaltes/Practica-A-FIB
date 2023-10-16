@@ -113,7 +113,7 @@ void tester::execute() {
 }
 
 void tester::print_results() {
-    cout << mean_standard << ";" << variance_standard << mean_relaxed << ";" << variance_relaxed << ";"<< mean_squarish << ";" << variance_squarish << endl;
+    cout << mean_standard << ";" << variance_standard << ";"<< mean_relaxed << ";" << variance_relaxed << ";"<< mean_squarish << ";" << variance_squarish << endl;
     /*cout << "---- RESULTS ----" << endl << endl;
     cout << "Standard: Visited nodes: " << mean_standard << " (average) Variança: " << variance_standard << endl;
     cout << "Relaxed: Visited nodes: " << mean_relaxed << " (average) Variança: " << variance_relaxed <<endl;
