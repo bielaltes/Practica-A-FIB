@@ -33,7 +33,7 @@ def main():
 
     plt.xlabel('n')
     plt.ylabel('C(n)')
-    plt.title(f'Búsqueda del mas cercano con k = {k}')
+    plt.title(f'Búsqueda del más cercano con k = {k}')
     plt.legend()
     plt.grid(True)
 
