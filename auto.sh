@@ -3,7 +3,7 @@
 # Define the parameters
 program="kdtree_NN"
 input_file="test"
-param1="4"
+param1="3"
 param2="100"
 param3="1000"
 
