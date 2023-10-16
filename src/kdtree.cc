@@ -135,8 +135,9 @@ void kdtree::insert_node(const vector<double>& clau) {
         _root = new node(clau, 0);
     }
     else{
-        vector<double> vd(clau.size(), 1.0);
-        _root->insert_node(clau, _type, vd);
+        vector<double> b_b_min(clau.size(), 0.0);
+        vector<double> b_b_max(clau.size(), 1.0);
+        _root->insert_node(clau, _type, b_b_min, b_b_max);
     }
 }
 
@@ -157,8 +158,9 @@ void kdtree::insert_random_node(int dimensions) {
         _root = new node(clau, 0);
     }
     else{
-        vector<double> vd(clau.size(), 1.0);
-        _root->insert_node(clau, _type, vd);
+        vector<double> b_b_min(clau.size(), 0.0);
+        vector<double> b_b_max(clau.size(), 1.0);
+        _root->insert_node(clau, _type, b_b_min, b_b_max);
     }
 }
 

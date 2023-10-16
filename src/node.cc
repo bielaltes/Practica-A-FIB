@@ -67,7 +67,7 @@ void node::destroyNodes(node* node) {
     node = NULL;
 }
 
-int node::choose_disc(Kd_type disc_policy, vector<double>& bounding_box) {
+int node::choose_disc(Kd_type disc_policy, vector<double>& b_box_min, vector<double>& b_box_max) {
     int disc = -1;
     switch(disc_policy) {
         case standard:
@@ -77,10 +77,10 @@ int node::choose_disc(Kd_type disc_policy, vector<double>& bounding_box) {
             disc = rand()%this->_coords.size();
             break;
         case squarish:
-            float max = 0;
-            for (long unsigned int i = 0; i < bounding_box.size(); ++i) {
-                if (bounding_box[i] > max or i == 0) {
-                    max = bounding_box[i];
+            double max = numeric_limits<double>::min();
+            for (long unsigned int i = 0; i < b_box_min.size(); ++i) {
+                if (b_box_max[i] - b_box_min[i] > max) {
+                    max = b_box_max[i] - b_box_min[i];
                     disc = i;
                 }
             }
@@ -89,27 +89,27 @@ int node::choose_disc(Kd_type disc_policy, vector<double>& bounding_box) {
     return disc;
 }
 
-void node::insert_node(const vector<double>& query, Kd_type disc_policy, vector<double>& bounding_box) {
+void node::insert_node(const vector<double>& query, Kd_type disc_policy, vector<double>& b_box_min, vector<double>& b_box_max) {
     if (query[this->_disc] < this->_coords[this->_disc]) {
         // Reduzco la caja a partir del discriminante 
         
-        bounding_box[this->_disc] = this->_coords[this->_disc]; //bounding_box del cuadrante izquierdo
+        b_box_max[this->_disc] = this->_coords[this->_disc]; //bounding_box del cuadrante izquierdo
         if (this->_left == nullptr) {
-            int disc = choose_disc(disc_policy, bounding_box);
+            int disc = choose_disc(disc_policy,b_box_min, b_box_max);
             _left = new node(query, disc);
         }
         else {
-            this->_left->insert_node(query, disc_policy, bounding_box);
+            this->_left->insert_node(query, disc_policy, b_box_min, b_box_max);
         }
     }
     else {
-        bounding_box[this->_disc] = abs(this->_coords[this->_disc] - bounding_box[this->_disc]);
+        b_box_min[this->_disc] = this->_coords[this->_disc];
         if (this->_right == nullptr) {
-            int disc = choose_disc(disc_policy, bounding_box);
+            int disc = choose_disc(disc_policy, b_box_min, b_box_max);
             _right = new node(query, disc);
         }
         else {
-            this->_right->insert_node(query, disc_policy, bounding_box);
+            this->_right->insert_node(query, disc_policy, b_box_min, b_box_max);
         }
     }
 

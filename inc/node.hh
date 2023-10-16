@@ -16,7 +16,7 @@ class node {
     int _disc;
     node* _left;
     node* _right;
-    int choose_disc(Kd_type disc_policy, vector<double>& bounding_box);
+    int choose_disc(Kd_type disc_policy, vector<double>& b_box_min, vector<double>&b_box_max);
 
 	public:
 		//Constructors and destructors
@@ -37,7 +37,7 @@ class node {
 
 		//Member functions
 		void destroyNodes(node* node);
-        void insert_node(const vector<double>& query, Kd_type disc_policy, vector<double>& bounding_box);
+        void insert_node(const vector<double>& query, Kd_type disc_policy, vector<double>& b_box_min, vector<double>& b_box_max);
 };
 
 #endif
