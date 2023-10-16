@@ -11,5 +11,5 @@ param3="1000"
 for n in {1000..100000..1000}; do
   # Call the program with the parameters
   echo "Running $program with n=$n..."
-  ./$program $input_file $param1 $n $param2 $param3 >> out.txt
+  ./$program $input_file $param1 $n $param2 $param3 >> out.csv
 done
