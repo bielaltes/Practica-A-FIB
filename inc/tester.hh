@@ -9,7 +9,7 @@ typedef vector<double> vd;
 typedef vector<vd> vvd;
 
 class tester {
-	public:
+	private:
 		int _k; //k-dimensions
 		int _n; //n number of nodes
 		int _N; //Number of random trees to create
@@ -31,13 +31,21 @@ class tester {
         std::vector<int> visited_squarish;
 
         pthread_t threads[3];
-		vector<double> random_point(int dim);
+		
 
 	public:
 		//Constructors and destructors
 		tester(int k, int n, int N, int Q);
 		~tester(void);
 
+        int getn(){return _n;}
+        int getN(){return _N;}
+        int getk(){return _k;}
+        int getQ(){return _Q;}
+        vector<int> &getvisited_standard(){return visited_standard;}
+        vector<int> &getvisited_relaxed(){return visited_relaxed;}
+        vector<int> &getvisited_squarish(){return visited_squarish;}
+        vector<double> random_point(int dim);
         static void *exec_pthread(void *t);
 		void execute();
 		void print_results();

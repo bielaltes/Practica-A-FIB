@@ -33,37 +33,31 @@ void *tester::exec_pthread(void *aux)
 {
     tester *t = (static_cast<pair< tester *, int >*>(aux))->first;
     int ty = (static_cast<pair< tester *, int >*>(aux))->second;
-    for (int i = 0; i < t->_N; ++i) {
+    for (int i = 0; i < t->getN(); ++i) {
         Kd_type type;
         if (ty == 0) type = standard;
         else if (ty == 1) type = relaxed;
         else type = squarish;
-        kdtree* kdt = new kdtree(t->_n, type);
-        for (int i = 0; i < t->_n; ++i) kdt->insert_random_node(t->_k);
+        kdtree* kdt = new kdtree(t->getn(), type);
+        for (int i = 0; i < t->getn(); ++i) kdt->insert_random_node(t->_k);
 
         vector<double> query;
-        for (int j = 0; j < t->_Q; ++j) {
-            query = t->random_point(t->_k);  
+        for (int j = 0; j < t->getQ(); ++j) {
+            query = t->random_point(t->getk());  
             int visited_nodes = 0;
             kdt->get_nearest_neighbor(query, visited_nodes);
 
             if (ty == 0) 
             {
-                // t->visited_standard += visited_nodes;
-                // t->variance_standard += visited_nodes * visited_nodes;
-                t->visited_standard.push_back(visited_nodes);
+                t->getvisited_standard().push_back(visited_nodes);
             }
             else if (ty == 1)
             {
-                // t->visited_relaxed += visited_nodes;
-                // t->variance_relaxed += visited_nodes * visited_nodes;
-                t->visited_relaxed.push_back(visited_nodes);
+                t->getvisited_relaxed().push_back(visited_nodes);
             } 
             else 
                 {
-                // t->visited_squarish += visited_nodes;
-                // t->variance_squarish += visited_nodes * visited_nodes;
-                t->visited_squarish.push_back(visited_nodes);
+                t->getvisited_squarish().push_back(visited_nodes);
             }
         }
         delete kdt;
