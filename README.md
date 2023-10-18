@@ -23,5 +23,5 @@ A continuación se explica el propósito de cada uno de ellos:
 
 - create: se abre un dialogo para crear un archivo csv con un árbol generado aleatoriamente para ser usado posteriormente.
 - file: lee de un fichero csv para ejecutar la búsqueda del vecino más cercano sobre un punto aleatorio.
-- test: se abre un diálogo para testear búsquedas entre gran numero de árboles generados aleatoriamente.
+- test: se abre un diálogo para testear búsquedas en árboles generados aleatoriamente.
 
