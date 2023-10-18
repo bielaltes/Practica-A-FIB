@@ -1,0 +1,6 @@
+Para poder ejecutar estos programas Python, es necesario tener instalado numpy (pip install numpy),
+scipy (pip install scipy) y matplotlib (pip install matplotlib). Hay que pasarle como argumento
+una dimensión entre 2 y 6. El programa cojerá los .csv de datos obtenidos que hay en el directorio
+datos_csv, y creará y mostrará las gráficas.
+
+Ejemplo de ejecución: python3 plot_maker.py 4

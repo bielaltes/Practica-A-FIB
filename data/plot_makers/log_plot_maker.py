@@ -15,7 +15,7 @@ def main():
 
     num = 1000;
 
-    csv_file = f'out{k}.csv'
+    csv_file = f'../datos_csv/out{k}.csv'
 
     with open(csv_file, 'r') as archivo_csv:
         lector_csv = csv.reader(archivo_csv, delimiter=';')
