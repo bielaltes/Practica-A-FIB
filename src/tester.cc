@@ -100,19 +100,15 @@ void tester::execute() {
     variance_standard /= (visited_standard.size() - 1);
     variance_relaxed /= (visited_relaxed.size() - 1);
     variance_squarish /= (visited_squarish.size() - 1);
-    
-    //variance_standard = variance_standard/(_N*_Q) - visited_standard;
-    //variance_relaxed = variance_relaxed/(_N*_Q) - visited_relaxed;
-    //variance_squarish = variance_squarish/(_N*_Q) - visited_squarish;
+
 }
 
 void tester::print_results() {
-    cout << mean_standard << ";" << variance_standard << ";"<< mean_relaxed << ";" << variance_relaxed << ";"<< mean_squarish << ";" << variance_squarish << endl;
-    /*cout << "---- RESULTS ----" << endl << endl;
+    cout << "---- RESULTS ----" << endl << endl;
     cout << "Standard: Visited nodes: " << mean_standard << " (average) Variança: " << variance_standard << endl;
     cout << "Relaxed: Visited nodes: " << mean_relaxed << " (average) Variança: " << variance_relaxed <<endl;
     cout << "Squarish: Visited nodes: " << mean_squarish << " (average) Variança: " << variance_squarish <<endl;
-    */
+    
 }
 
 
