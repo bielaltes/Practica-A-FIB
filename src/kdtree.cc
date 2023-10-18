@@ -23,7 +23,7 @@ kdtree::kdtree( const string &input, Kd_type& type) {
     char aux;
     ss >> _dim >> aux >> _size;
 
-    cout << "Dimensions: " << _dim << " " << "Number of points " << _size << endl;
+    cout << "Dimensiones: " << _dim << endl << "Número de registros: " << _size << endl;
 
     for (int i = 0; i < _size; ++i) 
     {

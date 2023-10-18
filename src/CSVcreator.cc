@@ -2,7 +2,7 @@
 
 void CSVcreator::createCSV() {
     string input;
-    cout << "Name of the file: \n";
+    cout << "Nombre del archivo a crear (sin el .csv): ";
     cin >> input;
     std::ofstream file(input + ".csv");
     if (!file.is_open())
@@ -10,9 +10,9 @@ void CSVcreator::createCSV() {
 
     int dim, size;
     srand(time(NULL));
-    cout << "Insert number of dimensions: \n";
+    cout << "Inserte el número de dimensiones: ";
     cin >> dim;
-    cout << "Insert size of the sample: \n";
+    cout << "Inserte el número de registros de la muestra: ";
     cin >> size;
     file << dim << "," << size << std::endl;
     for (int i = 0; i < size; ++i)
@@ -31,10 +31,10 @@ void CSVcreator::runCSV()
 {
     string aux, aux2;
     Kd_type type;
-    cout << "Insert name of the file" << endl;
+    cout << "Inserte el nombre del archivo (sin el .csv): ";
     cin >> aux;
 
-    cout << "Select type of tree: standard, relaxed or squarish: ";
+    cout << "Escriba el tipo de árbol a usar: standard, relaxed o squarish: ";
     cin >> aux2;
 
     if (aux2 == "standard") type = standard;
@@ -44,7 +44,7 @@ void CSVcreator::runCSV()
 
     kdtree* k = new kdtree(aux + ".csv", type);
 
-    cout << "Using random query" << endl << endl;
+    cout << "Usando query aleatoria" << endl << endl;
     //exemple de query per el output.csv
     vector<double> clau(k->getDim());
     srand(time(NULL));
@@ -53,22 +53,23 @@ void CSVcreator::runCSV()
     }
 
     static clock_t start;
-    cout << "LOGARITMIC: \n";
+    cout << "Algoritmo eficiente: \n";
     int visited = 0;
     start = clock();
     node* n = k->get_nearest_neighbor(clau, visited);
-    cout << fixed <<"El temps logaritmic ha tardat: " << static_cast<double>(clock() - start)/ CLOCKS_PER_SEC << " segons"<< endl;
-    cout << fixed << "En aquest temps, ha visitat " << visited << " nodes\n";
+    cout << fixed <<"El algoritmo eficiente ha tardado: " << static_cast<double>(clock() - start)/ CLOCKS_PER_SEC << " segundos"<< endl;
+    cout << fixed << "En este tiempo ha visitado " << visited << " nodos\n";
     //per veure la clau més propera
-    cout << "La query ha estat: ";
+    cout << "La query ha estado: ";
     vector<double> v = n->getCoords();
     for (int i = 0; i < (int)clau.size(); ++i) cout << clau[i] << ' ';
     cout << endl;
-    cout << "El punt més proper trobat ha estat: ";
+    cout << "El punto más cercano es ";
     for (int i = 0; i < (int)v.size(); ++i) cout << v[i] << ' ';
     cout << endl << endl;
 
 
+    /*
     cout << "LINEAL: \n";
     start = clock();
     node* n_lineal = k->get_nearest_neighbor_lineal(clau);
@@ -82,6 +83,7 @@ void CSVcreator::runCSV()
     cout << "El punt més proper trobat ha estat: ";
     for (int i = 0; i < (int)v.size(); ++i) cout << v[i] << ' ';
     cout << endl << endl;
+    */
 }
 
 

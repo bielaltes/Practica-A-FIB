@@ -25,10 +25,10 @@ int main(int argc, char **argv)  {
     else if (string(argv[1]) == "test") 
     {
             int k, n, N, Q; 
-            cout << "Insert the number of dimensions k: "; cin >> k;
-            cout << "Insert the number of nodes n: ";  cin >> n; 
-            cout << "Insert the number of random trees to generate: "; cin >> N;
-            cout << "Insert the number of queries in each tree: "; cin >> Q;
+            cout << "Inserte el número de dimensiones k: "; cin >> k;
+            cout << "Inserte el número de nodos n: ";  cin >> n; 
+            cout << "Inserte el número de árboles aleatorios a generar N: "; cin >> N;
+            cout << "Inserte el número de consultas a realizar en cada árbol Q: "; cin >> Q;
 
             tester* t = new tester(k, n, N, Q);
             t->execute();

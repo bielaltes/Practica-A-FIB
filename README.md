@@ -25,3 +25,6 @@ A continuación se explica el propósito de cada uno de ellos:
 - file: lee de un fichero csv para ejecutar la búsqueda del vecino más cercano sobre un punto aleatorio.
 - test: se abre un diálogo para testear búsquedas en árboles generados aleatoriamente.
 
+El objetivo del modo file es poder ver que el algoritmo funciona bien, ya que el modo test solo da estadísticas de los nodos visitados.
+La idea es crear un sample con ./kdtree_NN create y usar ./kdtree_NN file para realizar búsquedas en el árbol que usa dicho sample.
+
